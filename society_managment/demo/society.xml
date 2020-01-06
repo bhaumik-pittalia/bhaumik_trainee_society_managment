@@ -1,0 +1,16 @@
+<odoo>
+	<data>
+		<record id='society0' model='society.society'>
+			<field name='name'>kalpatru</field>
+			<field name='registration_number'>78946</field>
+			<field name='address'>Incomtax</field>
+			<field name='society_type'>co-oprativ</field>
+		</record>
+		<record id='society1' model='society.society'>
+			<field name='name'>vardhman</field>
+			<field name='registration_number'>96534</field>
+			<field name='address'>Bhuyangdev</field>
+			<field name='society_type'>co-oprativ</field>
+		</record>
+	</data>
+</odoo>

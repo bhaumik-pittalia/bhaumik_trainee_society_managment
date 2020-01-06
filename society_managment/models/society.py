@@ -28,6 +28,7 @@ class Member(models.Model):
              ('Secretary', 'Secratery'),
              ('member', 'Member')
              ])
+	
 
 	@api.constrains('ph_no')
 	def _check_ph_no(self):
@@ -67,5 +68,7 @@ class Notic_Board(models.Model):
              ('program', 'Program')
              ])
 	date = fields.Date(string='Date')
+	start_date = fields.Date(string='Start Date')
+	end_date = fields.Date(string='End Date')
 	description = fields.Text(string='Details')
 	society_ids = fields.Many2one(comodel_name='society.society')

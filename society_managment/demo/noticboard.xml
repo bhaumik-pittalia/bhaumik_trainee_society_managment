@@ -1,0 +1,19 @@
+<odoo>
+	<data>
+		<record id='noticboard0' model='noticboard.noticboard'>
+			<field name='name'>picnic</field>
+			<field name='notic_type'>program</field>
+			<field name='date'>2020-01-16</field>
+			<field name='description'>picnic to saputara</field>
+			<field name='society_ids'>2</field>
+		</record>
+
+		<record id='noticboard1' model='noticboard.noticboard'>
+			<field name='name'>meeting</field>
+			<field name='notic_type'>meeting</field>
+			<field name='date'>2020-01-14</field>
+			<field name='description'>meeting for discuss about picnic</field>
+			<field name='society_ids'>2</field>
+		</record>
+	</data>
+</odoo>
