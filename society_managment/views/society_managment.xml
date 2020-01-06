@@ -1,0 +1,180 @@
+<odoo>
+	<data>
+		<record id='society_registration_form_view' model='ir.ui.view'>
+			<field name='name'>society registration form</field>
+			<field name='model'>society.society</field>
+			<field name='arch' type='xml'>
+				<form string='society registration form view'>
+					<sheet>
+						<group>
+							<field name='name'/>
+							<field name='registration_number'/>
+							<field name='address'/>
+							<field name='society_type'/>
+						</group>							
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="society_tree_view" model="ir.ui.view">
+			<field name="name">society tree</field>
+			<field name="model">society.society</field>
+			<field name="arch" type="xml">
+				<tree string="society tree"> 
+					<field name="name"/>
+					<field name="registration_number"/>
+					<field name="society_type"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="society_search_view" model="ir.ui.view">
+			<field name="name">society search</field>
+			<field name="model">society.society</field>
+			<field name="arch" type="xml">
+				<search>
+					<field name="name"/>					
+					<field name="registration_number"/>
+				</search>
+			</field>
+		</record>
+
+
+		<record id='member_registration_form_view' model='ir.ui.view'>
+			<field name='name'>member registration form</field>
+			<field name='model'>member.member</field>
+			<field name='arch' type='xml'>
+				<form string='member registration form view'>
+					<sheet>
+						<group>
+							<field name='name'/>
+							<field name='society_id'/>
+							<field name='house_no'/>
+							<field name='ph_no'/>
+							<field name='email'/>
+							<field name='user_type' widget='radio'/>
+						</group>							
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="member_tree_view" model="ir.ui.view">
+			<field name="name">member tree</field>
+			<field name="model">member.member</field>
+			<field name="arch" type="xml">
+				<tree string="member tree"> 
+					<field name="name"/>
+					<field name="society_id"/>
+					<field name="ph_no"/>
+					<field name="email"/>
+					<field name="user_type"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="member_search_view" model="ir.ui.view">
+			<field name="name">member search</field>
+			<field name="model">member.member</field>
+			<field name="arch" type="xml">
+				<search>
+					<field name="name"/>					
+					<field name="user_type"/>
+				</search>
+			</field>
+		</record>
+
+		<record id='Complaint_form_view' model='ir.ui.view'>
+			<field name='name'>Complaint form</field>
+			<field name='model'>complaint.complaint</field>
+			<field name='arch' type='xml'>
+				<form string='Complaint form view'>
+					<sheet>
+						<group>
+
+							<field name='member_ids'/>
+							<field name='complaint_details' widget='many2many_checkboxs'/>
+							<field name='complaint_date'/>
+						</group>							
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="Complaint_tree_view" model="ir.ui.view">
+			<field name="name">Complaint tree</field>
+			<field name="model">complaint.complaint</field>
+			<field name="arch" type="xml">
+				<tree string="complaint tree"> 
+					<field name="member_ids"/>
+					<field name="complaint_details"/>
+					<field name="complaint_date"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id='Notic_board_form_view' model='ir.ui.view'>
+			<field name='name'>Notic board form</field>
+			<field name='model'>noticboard.noticboard</field>
+			<field name='arch' type='xml'>
+				<form string='noticboard form view'>
+					<sheet>
+						<group>
+							<field name='name'/>
+							<field name='notic_type' widget='radio'/>
+							<field name='date'/>
+							<field name='description'/>
+							<field name='society_ids'/>
+						</group>							
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="Notic_tree_view" model="ir.ui.view">
+			<field name="name">Notic tree</field>
+			<field name="model">noticboard.noticboard</field>
+			<field name="arch" type="xml">
+				<tree string="member tree"> 
+					<field name="name"/>
+					<field name="notic_type"/>
+					<field name="date"/>
+					<field name="society_ids"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id='society_registration_action' model='ir.actions.act_window'>
+			<field name='name'>society registration action</field>
+			<field name='res_model'>society.society</field>
+			<field name='view_mode'>tree,form</field>
+		</record>
+
+		<record id='member_registration_action' model='ir.actions.act_window'>
+			<field name='name'>member registration action</field>
+			<field name='res_model'>member.member</field>
+			<field name='view_mode'>tree,form</field>
+		</record>
+
+		<record id='complaint_action' model='ir.actions.act_window'>
+			<field name='name'>complaint action</field>
+			<field name='res_model'>complaint.complaint</field>
+			<field name='view_mode'>tree,form</field>
+		</record>
+
+		<record id='notic_board_action' model='ir.actions.act_window'>
+			<field name='name'>notic board action</field>
+			<field name='res_model'>noticboard.noticboard</field>
+			<field name='view_mode'>tree,form</field>
+		</record>
+
+		<menuitem id='main_menu' name='society Managment'/>
+		<menuitem id='society_registration_view' name='society registration' action='society_registration_action' parent='main_menu'/>
+		<menuitem id='member_registration_view' name='member registration' action='member_registration_action' parent='main_menu'/>
+		<menuitem id='complaint_view' name='complaint registration' action='complaint_action' parent='main_menu'/>
+		<menuitem id='notic_board_view' name='Notic' action='notic_board_action' parent='main_menu'/>
+
+	</data>
+</odoo>
+

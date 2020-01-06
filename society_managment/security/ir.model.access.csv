@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_society_society,access_society_society,model_society_society,base.group_user,1,1,1,1
+access_complaint_complaint,access_complaint_complaint,model_complaint_complaint,base.group_user,1,1,1,1
+access_member_member,access_member_member,model_member_member,base.group_user,1,1,1,1
+access_noticboard_noticboard,access_noticboard_noticboard,model_noticboard_noticboard,base.group_user,1,1,1,1
