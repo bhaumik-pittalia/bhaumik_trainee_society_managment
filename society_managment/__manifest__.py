@@ -5,13 +5,11 @@
 	'type' : 'application',
 	'data' : [
 		'security/ir.model.access.csv',
-		'views/society_managment.xml'
+		'views/society_managment.xml',
+		'reports.xml',
 	],
-	# 'demo' : [
-	# 	'demo/society.xml',
-	# 	'demo/member.xml',
-	# 	'demo/complaint.xml',
-	# 	'demo/noticboard.xml'
-	# ],
+	'demo' : [
+		'demo/demo.xml',
+	],
 	'application' : True
 }
