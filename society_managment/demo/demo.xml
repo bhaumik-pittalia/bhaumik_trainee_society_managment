@@ -1,0 +1,102 @@
+<odoo>
+	<data>
+		<record id='society0' model='society.society'>
+			<field name='name'>Kalpatru</field>
+			<field name='registration_number'>78946</field>
+			<field name='address'>Incomtax</field>
+			<field name='society_type'>cooperative</field>
+		</record>
+
+		<record id='society1' model='society.society'>
+			<field name='name'>Vardhman</field>
+			<field name='registration_number'>96534</field>
+			<field name='address'>Bhuyangdev</field>
+			<field name='society_type'>cooperative</field>
+		</record>
+
+		<record id='society2' model='society.society'>
+			<field name='name'>Nrushi park</field>
+			<field name='registration_number'>56478</field>
+			<field name='address'>Ankur</field>
+			<field name='society_type'>cooperative</field>
+		</record>
+
+		<record id='member0' model='member.member'>
+			<field name='name'>prasant</field>
+			<field name='society_id' ref='society_managment.society1'/>
+			<field name='house_no'>13</field>
+			<field name='ph_no'>9426874569</field>
+			<field name='email'>prasantpittalia@gmail.com</field>
+			<field name='user_type'>Secretary</field>
+		</record>
+
+		<record id='member1' model='member.member'>
+			<field name='name'>bhaumik</field>
+			<field name='society_id' ref='society_managment.society1'/>
+			<field name='house_no'>23</field>
+			<field name='ph_no'>9426817527</field>
+			<field name='email'>bhaumikpittalia@gmail.com</field>
+			<field name='user_type'>member</field>
+		</record>
+
+		<record id='member2' model='member.member'>
+			<field name='name'>bhavya</field>
+			<field name='society_id' ref='society_managment.society0'/>
+			<field name='house_no'>16</field>
+			<field name='ph_no'>9426815515</field>
+			<field name='email'>bhavyapittalia@gmail.com</field>
+			<field name='user_type'>Secretary</field>
+		</record>
+
+		<record id='member3' model='member.member'>
+			<field name='name'>vivek</field>
+			<field name='society_id' ref='society_managment.society2'/>
+			<field name='house_no'>25</field>
+			<field name='ph_no'>9426865515</field>
+			<field name='email'>vivek@gmail.com</field>
+			<field name='user_type'>Secretary</field>
+		</record>
+
+		<record id='complaint0' model='complaint.complaint'>
+			<field name='complaint_details'>water</field>
+			<field name='complaint_date'>2020-01-06</field>
+			<field name='member_ids' ref='society_managment.member1'/>
+		</record>
+
+
+		<record id='complaint1' model='complaint.complaint'>
+			<field name='complaint_details'>security</field>
+			<field name='complaint_date'>2020-01-08</field>
+			<field name='member_ids' ref='society_managment.member0'/>
+		</record>
+
+		<record id='complaint2' model='complaint.complaint'>
+			<field name='complaint_details'>commonplot</field>
+			<field name='complaint_date'>2020-01-10</field>
+			<field name='member_ids' ref='society_managment.member2'/>
+		</record>
+
+		<record id='complaint3' model='complaint.complaint'>
+			<field name='complaint_details'>water</field>
+			<field name='complaint_date'>2020-01-11</field>
+			<field name='member_ids' ref='society_managment.member3'/>
+		</record>
+
+		<record id='noticboard0' model='noticboard.noticboard'>
+			<field name='name'>picnic</field>
+			<field name='notic_type'>program</field>
+			<field name='date'>2020-01-16</field>
+			<field name='description'>picnic to saputara</field>
+			<field name='society_ids' ref='society_managment.society0'/>
+		</record>
+
+		<record id='noticboard1' model='noticboard.noticboard'>
+			<field name='name'>meeting</field>
+			<field name='notic_type'>meeting</field>
+			<field name='date'>2020-01-14</field>
+			<field name='description'>meeting for discuss about picnic</field>
+			<field name='society_ids' ref='society_managment.society0'/>
+		</record>
+
+	</data>
+</odoo>
