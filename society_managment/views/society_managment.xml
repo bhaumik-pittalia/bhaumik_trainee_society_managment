@@ -271,8 +271,8 @@
 
 
 		<menuitem id='main_menu' name='society Managment'/>
-		<menuitem id='society_registration_view' name='Society' action='society_action' parent='main_menu'/>
-		<menuitem id='member_registration_view' name='member registration' action='member_action' parent='main_menu'/>
+		<menuitem id='society_view' name='Society' action='society_action' parent='main_menu'/>
+		<menuitem id='member_view' name='member' action='member_action' parent='main_menu'/>
 		<menuitem id='complaint_view' name='Complaint' action='complaint_action' parent='main_menu'/>
 		<menuitem id='notic_board_view' name='Notic' action='notic_board_action' parent='main_menu'/>
 		<menuitem id='wizard_menu' name='wizard' action='launch_session_wizard' parent='main_menu'/>
