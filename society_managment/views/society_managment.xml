@@ -245,25 +245,25 @@
 
 
 		<record id='society_action' model='ir.actions.act_window'>
-			<field name='name'>society.action</field>
+			<field name='name'>Society Action</field>
 			<field name='res_model'>society.society</field>
 			<field name='view_mode'>tree,form,kanban</field>
 		</record>
 
 		<record id='member_action' model='ir.actions.act_window'>
-			<field name='name'>member.action</field>
+			<field name='name'>Member Action</field>
 			<field name='res_model'>member.member</field>
 			<field name='view_mode'>tree,form,kanban</field>
 		</record>
 
 		<record id='complaint_action' model='ir.actions.act_window'>
-			<field name='name'>complaint.action</field>
+			<field name='name'>Complaint Action</field>
 			<field name='res_model'>complaint.complaint</field>
 			<field name='view_mode'>tree,form,graph</field>
 		</record>
 
 		<record id='notic_board_action' model='ir.actions.act_window'>
-			<field name='name'>noticboard.action</field>
+			<field name='name'>Noticboard Action</field>
 			<field name='res_model'>noticboard.noticboard</field>
 			<field name='view_mode'>tree,form,calendar</field>
 		</record>

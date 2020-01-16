@@ -14,7 +14,7 @@ class Society(models.Model):
     ])
     _sql_constraints = [
         ('registration_number_uniq', 'unique(registration_number)',
-         'registration number is wrong!')
+         'registration number is Not Valid!')
     ]
 
     @api.model
