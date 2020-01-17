@@ -50,12 +50,11 @@
       <label>Address</label>
       <input type="text" class="form-control" name="address" t-attf-value="#{s.address if s else ''}" rows="3"/>
       </div>
-        <div>
-          <lable>Society Type
+        <div class="form-group">
+          <lable>Society Type </lable>
             <select class="form-control" id="society_id" name="society_type">                
               <option t-attf-value="#{s.society_type if s else 'cooperative'}">cooperative</option>
             </select>
-          </lable>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>

@@ -3,7 +3,7 @@
     <report
         id="report_session"
         model="noticboard.noticboard"
-        string="Session Report"
+        string="Notic Report"
         name="society_managment.report_session_view"
         file="society_managment.report_session"
         report_type="qweb-pdf" />
@@ -14,11 +14,15 @@
                 <t t-call="web.external_layout">
                     <div class="page">
                     <t t-foreach="docs" t-as="doc">
-                        <h2>Notic Board Report</h2>
-                            <td>
-                                <b>Name:</b>
-                                <h3 t-field="doc.name"/>
-                            </td>
+                        <h2><center>Notic Board Report</center></h2>
+                            <p>
+                                Name:
+                                <span t-field="doc.name"/>
+                            </p>
+                            <p>
+                                Notic Date
+                                <span t-field="doc.date"/>
+                            </p>
                             <p>
                                 From
                                 <span t-field="doc.start_date"/>
@@ -27,10 +31,10 @@
                             <p>
                                 <span t-field="doc.end_date"/>
                             </p>
-                            <td>
-                                <b>About Notic</b>
-                                <h3 t-field="doc.description"/>
-                            </td>
+                            <p>
+                                Notic Details
+                                <span t-field="doc.description"/>
+                            </p>
 
                     </t>
                     </div>
