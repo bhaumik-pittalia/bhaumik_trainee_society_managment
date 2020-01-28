@@ -7,7 +7,7 @@ class Society(models.Model):
     _description = 'Society details'
 
     name = fields.Char(string='Society Name')
-    registration_number = fields.Char(string='Registration number')
+    registration_number = fields.Char(string='Registration Number')
     address = fields.Text(string='Society Address')
     society_type = fields.Selection([
         ('cooperative', 'cooperative'),
@@ -24,14 +24,13 @@ class Society(models.Model):
 
 
 
-    
-
 class Member(models.Model):
     _name = 'member.member'
     _description = 'Member details'
-    
-    name = fields.Char(string='Member name')
-    society_id = fields.Many2one(comodel_name='society.society')
+
+    name = fields.Char(string='Member Name')
+    society_id = fields.Many2one(
+        comodel_name='society.society', ondelete='cascade')
     house_no = fields.Char(string='House Number')
     ph_no = fields.Char(string='Phon Number')
     email = fields.Char(string='Email-Id')
@@ -39,23 +38,6 @@ class Member(models.Model):
         ('Secretary', 'Secratery'),
         ('member', 'Member')
     ])
-    state = fields.Selection([
-        ('pending', 'pending'),
-        ('inprogress', 'inprogress'),
-        ('completed', 'completed')
-    ], default='pending')
-
-    def action_inprogress(self):
-        self.write({'state': 'inprogress'})
-        return True
-
-    def action_completed(self):
-        self.write({'state': 'completed'})
-        return True
-
-    def action_pending(self):
-        self.write({'state': 'pending'})
-        return True
 
     @api.constrains('ph_no')
     def _check_ph_no(self):
@@ -70,7 +52,6 @@ class Member(models.Model):
     ]
 
 
-
 class Complaint(models.Model):
     _name = 'complaint.complaint'
     _description = 'Complaint details'
@@ -83,6 +64,26 @@ class Complaint(models.Model):
     ])
     complaint_date = fields.Date(string='Complaint Date')
     member_ids = fields.Many2one(comodel_name='member.member')
+    state = fields.Selection([
+        ('pending', 'pending'),
+        ('inprogress', 'inprogress'),
+        ('completed', 'completed')
+    ], default='pending')
+
+    def action_pending(self):
+        self.write({'state': 'pending'})
+        return True
+
+    def action_inprogress(self):
+        self.write({'state': 'inprogress'})
+        return True
+
+    def action_completed(self):
+        self.write({'state' : 'completed'})
+        return True
+
+
+
 
 
 class Notic_Board(models.Model):
@@ -101,7 +102,38 @@ class Notic_Board(models.Model):
     description = fields.Text(string='Details')
     society_ids = fields.Many2one(comodel_name='society.society')
 
-
     def unlink(self):
         print("confirm")
         return super(Notic_Board, self).unlink()
+
+
+class Account(models.Model):
+    _name = 'balance.balance'
+    _description = 'society balance sheet'
+
+    name = fields.Many2one(string='Member Name', comodel_name='member.member')
+    amount = fields.Integer(string='Amount')
+    details = fields.Char(string='Details')
+    provide = fields.Selection([
+        ('recipt', 'Recipt'),
+        ('vouchar', 'Vouchar')
+    ])
+    balance = fields.Integer()
+
+    @api.constrains('amount')
+    def _check_ph_no(self):
+        balancesheet = self.env['balance.balance'].search([])
+        total_balance = 0
+        i = 0
+        if balancesheet:
+            for i in balancesheet:
+                if i.provide == 'recipt':
+                    total_balance += i.amount
+                else:
+                    total_balance -= i.amount
+        for r in self:
+            if total_balance < r.amount and r.provide == 'vouchar':
+                raise ValidationError(
+                    "Invalid Amount Avilable balance is : %s" % (total_balance +r.amount))
+            else:
+                r.balance=total_balance    

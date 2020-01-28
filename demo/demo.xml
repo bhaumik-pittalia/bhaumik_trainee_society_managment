@@ -1,0 +1,164 @@
+<odoo>
+	<data>
+		<record id='society0' model='society.society'>
+			<field name='name'>Jaymangal</field>
+			<field name='registration_number'>863257563</field>
+			<field name='address'>Naranpura</field>
+			<field name='society_type'>cooperative</field>
+		</record>
+
+		<record id='member0' model='member.member'>
+			<field name='name'>prasant</field>
+			<field name='society_id' ref='society_managment.society0'/>
+			<field name='house_no'>13</field>
+			<field name='ph_no'>9426874569</field>
+			<field name='email'>prasantpittalia@gmail.com</field>
+			<field name='user_type'>Secretary</field>
+		</record>
+
+		<record id='member1' model='member.member'>
+			<field name='name'>bhaumik</field>
+			<field name='society_id' ref='society_managment.society0'/>
+			<field name='house_no'>23</field>
+			<field name='ph_no'>9426817527</field>
+			<field name='email'>bhaumikpittalia@gmail.com</field>
+			<field name='user_type'>member</field>
+		</record>
+
+		<record id='member2' model='member.member'>
+			<field name='name'>bhavya</field>
+			<field name='society_id' ref='society_managment.society0'/>
+			<field name='house_no'>16</field>
+			<field name='ph_no'>9426815515</field>
+			<field name='email'>bhavyapittalia@gmail.com</field>
+			<field name='user_type'>member</field>
+		</record>
+
+		<record id='member3' model='member.member'>
+			<field name='name'>vivek</field>
+			<field name='society_id' ref='society_managment.society0'/>
+			<field name='house_no'>25</field>
+			<field name='ph_no'>9426865515</field>
+			<field name='email'>vivek@gmail.com</field>
+			<field name='user_type'>member</field>
+		</record>
+
+		<record id='member4' model='member.member'>
+			<field name='name'>Bhavin</field>
+			<field name='society_id' ref='society_managment.society0'/>
+			<field name='house_no'>20</field>
+			<field name='ph_no'>9426665515</field>
+			<field name='email'>jigar@gmail.com</field>
+			<field name='user_type'>member</field>
+		</record>
+
+		<record id='member5' model='member.member'>
+			<field name='name'>jigar</field>
+			<field name='society_id' ref='society_managment.society0'/>
+			<field name='house_no'>10</field>
+			<field name='ph_no'>6326865515</field>
+			<field name='email'>jigar1@gmail.com</field>
+			<field name='user_type'>member</field>
+		</record>
+
+
+
+		<record id='complaint0' model='complaint.complaint'>
+			<field name='complaint_details'>water</field>
+			<field name='complaint_date'>2020-01-06</field>
+			<field name='member_ids' ref='society_managment.member1'/>
+			<field name="state">completed</field>
+		</record>
+
+
+		<record id='complaint1' model='complaint.complaint'>
+			<field name='complaint_details'>security</field>
+			<field name='complaint_date'>2020-01-08</field>
+			<field name='member_ids' ref='society_managment.member0'/>
+			<field name="state">inprogress</field>
+		</record>
+
+		<record id='complaint2' model='complaint.complaint'>
+			<field name='complaint_details'>commonplot</field>
+			<field name='complaint_date'>2020-01-10</field>
+			<field name='member_ids' ref='society_managment.member2'/>
+			<field name="state">pending</field>
+		</record>
+
+		<record id='complaint3' model='complaint.complaint'>
+			<field name='complaint_details'>water</field>
+			<field name='complaint_date'>2020-01-11</field>
+			<field name='member_ids' ref='society_managment.member3'/>
+			<field name="state">inprogress</field>
+		</record>
+
+		<record id='noticboard0' model='noticboard.noticboard'>
+			<field name='name'>picnic</field>
+			<field name='notic_type'>program</field>
+			<field name='date'>2020-01-16</field>
+			<field name='description'>picnic to saputara</field>
+			<field name='society_ids' ref='society_managment.society0'/>
+		</record>
+
+		<record id='noticboard1' model='noticboard.noticboard'>
+			<field name='name'>meeting</field>
+			<field name='notic_type'>meeting</field>
+			<field name='date'>2020-01-14</field>
+			<field name='description'>meeting for discuss about picnic</field>
+			<field name='society_ids' ref='society_managment.society0'/>
+		</record>
+
+		<record id='balancesheet0' model='balance.balance'>
+			<field name='name' ref='society_managment.member0'></field>
+			<field name='amount'>3000</field>
+			<field name='details'>Maintance</field>
+			<field name='provide'>recipt</field>
+		</record>
+		<record id='balancesheet1' model='balance.balance'>
+			<field name='name' ref='society_managment.member1'></field>
+			<field name='amount'>3000</field>
+			<field name='details'>Maintance</field>
+			<field name='provide'>recipt</field>			
+			
+		</record>
+		<record id='balancesheet3' model='balance.balance'>
+			<field name='name' ref='society_managment.member2'></field>
+			<field name='amount'>3000</field>
+			<field name='details'>Maintance</field>
+			<field name='provide'>recipt</field>
+			
+		</record>
+		<record id='balancesheet4' model='balance.balance'>
+			<field name='name' ref='society_managment.member3'></field>
+			<field name='amount'>3000</field>
+			<field name='details'>Maintance</field>
+			<field name='provide'>recipt</field>
+		</record>
+		<record id='balancesheet5' model='balance.balance'>
+			<field name='name' ref='society_managment.member4'></field>
+			<field name='amount'>3000</field>
+			<field name='details'>Maintance</field>
+			<field name='provide'>recipt</field>
+			
+		</record>
+		<record id='balancesheet6' model='balance.balance'>
+			<field name='name' ref='society_managment.member5'></field>
+			<field name='amount'>3000</field>
+			<field name='details'>Maintance</field>
+			<field name='provide'>recipt</field>
+			
+		</record>
+		<record id='balancesheet7' model='balance.balance'>
+			<field name='name' ref='society_managment.member4'></field>
+			<field name='amount'>2000</field>
+			<field name='details'>Water Tank repair</field>
+			<field name='provide'>vouchar</field>
+		</record>
+		<record id='balancesheet8' model='balance.balance'>
+			<field name='name' ref='society_managment.member2'></field>
+			<field name='amount'>2000</field>
+			<field name='details'>Common Plot repair</field>
+			<field name='provide'>vouchar</field>
+		</record>
+	</data>
+</odoo>

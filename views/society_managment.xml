@@ -1,0 +1,384 @@
+<odoo>
+    <data>
+        <record id='society_form_view' model='ir.ui.view'>
+            <field name='name'>society.form</field>
+            <field name='model'>society.society</field>
+            <field name='arch' type='xml'>
+                <form string='Society form view'>
+                    <sheet>
+                        <group>
+                            <field name='name'/>
+                            <field name='registration_number'/>
+                            <field name='address'/>
+                            <field name='society_type'/>
+                        </group>                            
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="society_tree_view" model="ir.ui.view">
+            <field name="name">society.tree</field>
+            <field name="model">society.society</field>
+            <field name="arch" type="xml">
+                <tree string="society tree"> 
+                    <field name="name"/>
+                    <field name="registration_number"/>
+                    <field name='address'/>
+                    <field name="society_type"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="society_search_view" model="ir.ui.view">
+            <field name="name">society.search</field>
+            <field name="model">society.society</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name='address' filter_domain='["|",("name","ilike",self),("address","ilike",self)]'/>
+                    <field name="registration_number"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="society_kanban_view" model="ir.ui.view">
+            <field name="name">society.kanban</field>
+            <field name="model">society.society</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_dashboard" widget="color">
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_content">
+                                <field name="name"/>
+                                <field name="address"/>
+                                <field name="registration_number"/>
+                            </div>
+                        </t>
+                     </templates>
+                </kanban>
+            </field>
+        </record>
+
+
+        <record id='society_action' model='ir.actions.act_window'>
+            <field name='name'>Society Action</field>
+            <field name='res_model'>society.society</field>
+            <field name='view_mode'>tree,form,kanban</field>
+        </record>
+
+
+        <record id='member_form_view' model='ir.ui.view'>
+            <field name='name'>member registration form</field>
+            <field name='model'>member.member</field>
+            <field name='arch' type='xml'>
+                <form string='Member Form View'>
+                    <header>
+                        <button name="%(society_action)d"  string="click me" type="action"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name='name'/>
+                            <field name='society_id'/>
+                            <field name='house_no'/>
+                            <field name='ph_no'/>
+                            <field name='email'/>
+                            <field name='user_type' widget='radio'/>
+                        </group>                            
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="member_tree_view" model="ir.ui.view">
+            <field name="name">member.tree</field>
+            <field name="model">member.member</field>
+            <field name="arch" type="xml">
+                <tree string="Member tree" editable='bottom'> 
+                    <field name="name"/>
+                    <field name="society_id"/>
+                    <field name="house_no"/>
+                    <field name="ph_no"/>
+                    <field name="email"/>
+                    <field name="user_type"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="member_search_view" model="ir.ui.view">
+            <field name="name">member.search</field>
+            <field name="model">member.member</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>                    
+                    <field name="user_type"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="member_kanban_view" model="ir.ui.view">
+            <field name="name">member.kanban</field>
+            <field name="model">member.member</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by='user_type' class="o_kanban_dashboard" widget="progressbar">
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_content">
+                                <p><t t-esc="inprogress"/>hello</p>
+                                <field name="name"/>
+                                <field name="user_type"/>
+                            </div>
+                        </t>
+                     </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="member_graph_view" model="ir.ui.view">
+            <field name="name">complaint.graph</field>
+            <field name="model">member.member</field>
+            <field name="arch" type="xml">
+                <graph string="Member Tree">
+                    <field name="id" type='measure'/>
+                </graph>
+            </field>
+        </record>
+
+        <record id='complaint_form_view' model='ir.ui.view'>
+            <field name='name'>complaint.form</field>
+            <field name='model'>complaint.complaint</field>
+            <field name='arch' type='xml'>
+                <form string='Complaint form view' editable='bottom'>
+                    <header>
+                        <button name="action_pending" states="completed,inprogress" string="Pending" type="object" class='btn-danger'/>
+                        <button name="action_inprogress" states="pending,completed" string="Inprogress" type="object" class='btn-dark'/>
+                        <button name="action_completed" states="inprogress,pending" string="Completed" type="object" class='btn-success'/>
+                        <field name="state" widget="statusbar" statusbar_visible="pending,inprogress,completed" clickable="True"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name='member_ids'/>
+                            <field name='complaint_details'/>
+                            <field name='complaint_date'/>
+                        </group>                            
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="complaint_tree_view" model="ir.ui.view">
+            <field name="name">complaint.tree</field>
+            <field name="model">complaint.complaint</field>
+            <field name="arch" type="xml">
+                <tree string="Complaint Tree" decoration-info="complaint_details=='water'" decoration-danger="complaint_details=='security'" decoration-warning="complaint_details=='common plot'"> 
+                    <field name="member_ids"/>
+                    <field name="complaint_details"/>
+                    <field name="complaint_date"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="complaint_graph_view" model="ir.ui.view">
+            <field name="name">complaint.graph</field>
+            <field name="model">complaint.complaint</field>
+            <field name="arch" type="xml">
+                <graph string="Complaint Tree">
+                    <field name="complaint_details"/>
+                    <field name="member_ids" type='measure'/>
+                </graph>
+            </field>
+        </record>
+
+        <record id='activity_form_view' model='ir.ui.view'>
+            <field name='name'>activity.form</field>
+            <field name='model'>noticboard.noticboard</field>
+            <field name='arch' type='xml'>
+                <form string='Noticboard Form View'>
+                    <sheet>
+                        <group>
+                            <field name='name'/>
+                            <field name='notic_type' widget='radio'/>
+                            <field name='date'/>
+                        </group>
+                        <notebook>
+                            <page string='Activity days'>
+                                <group>
+                                    <field name='start_date'/>
+                                    <field name='end_date'/>
+                                </group>
+                            </page>
+                            <page string='Activity Details'>
+                                <group>
+                                <field name='description'/>
+                                <field name='society_ids'/>
+                            </group>
+                            </page>
+                        </notebook>                        
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="activity _tree_view" model="ir.ui.view">
+            <field name="name">>activity.tree</field>
+            <field name="model">noticboard.noticboard</field>
+            <field name="arch" type="xml">
+                <tree string="Activity  Tree View"> 
+                    <field name="name"/>
+                    <field name="notic_type"/>
+                    <field name="date"/>
+                    <field name="society_ids"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id='activity_calendar_view' model='ir.ui.view'> 
+            <field name='name'>>activity.calendar</field>
+            <field name='model'>noticboard.noticboard</field>
+            <field name='arch' type='xml'>
+                <calendar string='activity calendar view' date_start='start_date' date_stop='end_date'>
+                    <field name='name'/>
+                </calendar>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="wizard_form_view">
+            <field name="name">wizard.form</field>
+            <field name="model">member.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Add Member">
+                    <group>
+                        <field name="session_id"/>
+                        <field name="member_ids"/>
+                    </group>
+                    <footer>
+                        <button name="subscribe" type="object"
+                                string="Subscribe" class="oe_highlight"/>
+                        or
+                        <button special="cancel" string="Cancel"/>
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+        <act_window id="launch_session_wizard"
+                    name="Add Member"
+                    binding_model="member.member"
+                    res_model="member.wizard"
+                    view_mode="form"
+                    target="new"/>
+
+        <record id='Balcance_sheet_form_view' model='ir.ui.view'>
+            <field name='name'>balancesheet.form</field>
+            <field name='model'>balance.balance</field>
+            <field name='arch' type='xml'>
+                <form string='Balance Sheet form view'>
+                    <sheet>
+                        <group>
+                            <field name='name'/>
+                            <field name='amount'/>
+                            <field name='provide'/>
+                        </group>
+                            <notebook>
+                                <page string='details'>
+                                    <group>
+                                        <field name='details'/>
+                                    </group>
+                                </page>
+                            </notebook>                           
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model='ir.ui.view' id='Balcance_sheet_tree_view'>
+            <field name='name'>balancesheet.tree</field>
+            <field name='model'>balance.balance</field>
+            <field name='arch' type='xml'>
+                <tree string='Balance sheet tree view'>
+                    <field name='balance'/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="balance_pivot">
+            <field name="name">balance.pivot</field>
+            <field name="model">balance.balance</field>
+            <field name="arch" type="xml">
+                <pivot string='Balance sheet'>
+                    <field name="name" type="row"/>
+                    <field name="provide" type="col"/>
+                    <field name="amount" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="balance_graph_view" model="ir.ui.view">
+            <field name="name">balance.graph</field>
+            <field name="model">balance.balance</field>
+            <field name="arch" type="xml">
+                <graph string="Balance graph">
+                    <field name="balance" type='measure'/>
+                    <field name="provide"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id='dashboard_view' model='ir.ui.view'>
+            <field name='name'>dashboard.view</field>
+            <field name='model'>balance.balance</field>
+            <field name="mode">primary</field>
+            <field name='arch' type='xml'>
+                <dashboard>
+                    <view type="graph" ref="balance_graph_view"/>
+                    <view type="pivot" ref="balance_pivot"/>
+                </dashboard>
+            </field>
+        </record>
+
+      
+
+        <record id='member_action' model='ir.actions.act_window'>
+            <field name='name'>Member Action</field>
+            <field name='res_model'>member.member</field>
+            <field name='view_mode'>tree,form,kanban,graph</field>
+        </record>
+
+        <record id='complaint_action' model='ir.actions.act_window'>
+            <field name='name'>Complaint Action</field>
+            <field name='res_model'>complaint.complaint</field>
+            <field name='view_mode'>tree,form,graph</field>
+        </record>
+
+        <record id='activity_action' model='ir.actions.act_window'>
+            <field name='name'>Activity Action</field>
+            <field name='res_model'>noticboard.noticboard</field>
+            <field name='view_mode'>tree,form,calendar</field>
+        </record>
+
+        <record id='balancesheet_action' model='ir.actions.act_window'>
+            <field name='name'>Balance Sheet Action</field>
+            <field name='res_model'>balance.balance</field>
+            <field name='view_mode'>tree,form,pivot,graph</field>
+        </record>
+
+        <record id='dashboard_action' model='ir.actions.act_window'>
+            <field name='name'>Dashboard Action</field>
+            <field name='res_model'>balance.balance</field>
+            <field name='view_mode'>dashboard</field>
+        </record>
+
+        <menuitem id='main_menu' name='Society Managment' web_icon='society_managment,static/description/society.png' action='dashboard_action'/>
+        <menuitem id='configuration_menu' name='configuration' parent="main_menu" sequence='4'/>
+        <menuitem id='member_view' name='Member' action='member_action' parent='configuration_menu'/>
+        <menuitem id='balance_sheet_view' name='Balance Sheet' action='balancesheet_action' parent='configuration_menu'/>
+        <menuitem id='activity_view' name='Activity' parent='main_menu'/>
+        <menuitem id="activitys" name="Notice" parent="activity_view" action="activity_action"/>
+        <menuitem id='complaint_view' name='Complaint' action='complaint_action' parent='activity_view'/>
+        <menuitem id="report_menu" name="Reporting" parent="main_menu" sequence='3'/>
+        <menuitem id='balance_sheet_view' name='Balance Sheet' action='balancesheet_action' parent='report_menu'/>
+    </data>
+</odoo>
+
