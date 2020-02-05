@@ -1,5 +1,7 @@
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError
+from odoo import http
+from odoo.http import request
 
 
 class Society(models.Model):
@@ -12,6 +14,9 @@ class Society(models.Model):
     society_type = fields.Selection([
         ('cooperative', 'cooperative'),
     ])
+    company_id = fields.Many2one('res.company', required=True, default=lambda self: self.env.company)
+    
+
     _sql_constraints = [
         ('registration_number_uniq', 'unique(registration_number)',
          'registration number is Not Valid!')
@@ -29,8 +34,6 @@ class Member(models.Model):
     _description = 'Member details'
 
     name = fields.Char(string='Member Name')
-    society_id = fields.Many2one(
-        comodel_name='society.society', ondelete='cascade')
     house_no = fields.Char(string='House Number')
     ph_no = fields.Char(string='Phon Number')
     email = fields.Char(string='Email-Id')
@@ -38,7 +41,8 @@ class Member(models.Model):
         ('Secretary', 'Secratery'),
         ('member', 'Member')
     ])
-
+    company_id = fields.Many2one('res.company', required=True, default=lambda self: self.env.company)
+    res_user = fields.Many2one(comodel_name='res.users', store=True)
     @api.constrains('ph_no')
     def _check_ph_no(self):
         for numb in self:
@@ -51,6 +55,31 @@ class Member(models.Model):
         ('email_uniq', 'unique(email)', 'email is Already register!')
     ]
 
+    @api.model
+    def create(self, vals):
+        print('\n\n\n\n\n\n\n111111111111',vals)
+        groups_id_name = [(6, 0, [self.env.ref('base.group_portal').id])]
+        print('\n\n\n\n\n\n\n22222222222',groups_id_name)
+        partner = self.env['res.partner'].sudo().create({
+            'name': vals.get('name'),
+            'email':vals.get('email')
+        })
+        print('\n\n\n\n\n\n\n3333333333333',partner)
+        user = self.env['res.users'].sudo().create({
+            'partner_id': partner.id,
+            'login': vals.get('email'),
+            'password': vals.get('name'),
+            'groups_id': groups_id_name,
+        })
+        vals1 = {
+            'name': vals.get('name'),
+            'house_no': vals.get('house_no'),
+            'ph_no': vals.get('ph_no'),
+            'email': vals.get('email'),
+            'user_type': vals.get('user_type'),
+            'res_user': user.id,
+        }
+        return super(Member,self).create(vals1)
 
 class Complaint(models.Model):
     _name = 'complaint.complaint'
@@ -69,7 +98,8 @@ class Complaint(models.Model):
         ('inprogress', 'inprogress'),
         ('completed', 'completed')
     ], default='pending')
-
+    company_id = fields.Many2one('res.company', required=True, default=lambda self: self.env.company)
+    
     def action_pending(self):
         self.write({'state': 'pending'})
         return True
@@ -100,8 +130,8 @@ class Notic_Board(models.Model):
     start_date = fields.Date(string='Start Date')
     end_date = fields.Date(string='End Date')
     description = fields.Text(string='Details')
-    society_ids = fields.Many2one(comodel_name='society.society')
-
+    company_id = fields.Many2one('res.company', required=True, default=lambda self: self.env.company)
+    
     def unlink(self):
         print("confirm")
         return super(Notic_Board, self).unlink()
@@ -119,6 +149,8 @@ class Account(models.Model):
         ('vouchar', 'Vouchar')
     ])
     balance = fields.Integer()
+    company_id = fields.Many2one('res.company', required=True, default=lambda self: self.env.company)
+    
 
     @api.constrains('amount')
     def _check_ph_no(self):

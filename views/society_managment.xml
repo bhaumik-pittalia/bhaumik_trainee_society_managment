@@ -79,7 +79,6 @@
                     <sheet>
                         <group>
                             <field name='name'/>
-                            <field name='society_id'/>
                             <field name='house_no'/>
                             <field name='ph_no'/>
                             <field name='email'/>
@@ -94,13 +93,12 @@
             <field name="name">member.tree</field>
             <field name="model">member.member</field>
             <field name="arch" type="xml">
-                <tree string="Member tree" editable='bottom'> 
+                <tree string="Member tree"> 
                     <field name="name"/>
-                    <field name="society_id"/>
+                    <field name="company_id"/>
                     <field name="house_no"/>
                     <field name="ph_no"/>
                     <field name="email"/>
-                    <field name="user_type"/>
                 </tree>
             </field>
         </record>
@@ -155,13 +153,6 @@
                         <button name="action_completed" states="inprogress,pending" string="Completed" type="object" class='btn-success'/>
                         <field name="state" widget="statusbar" statusbar_visible="pending,inprogress,completed" clickable="True"/>
                     </header>
-                    <sheet>
-                        <group>
-                            <field name='member_ids'/>
-                            <field name='complaint_details'/>
-                            <field name='complaint_date'/>
-                        </group>                            
-                    </sheet>
                 </form>
             </field>
         </record>
@@ -194,7 +185,7 @@
             <field name='name'>activity.form</field>
             <field name='model'>noticboard.noticboard</field>
             <field name='arch' type='xml'>
-                <form string='Noticboard Form View'>
+                <form string='Activity Form View'>
                     <sheet>
                         <group>
                             <field name='name'/>
@@ -211,7 +202,6 @@
                             <page string='Activity Details'>
                                 <group>
                                 <field name='description'/>
-                                <field name='society_ids'/>
                             </group>
                             </page>
                         </notebook>                        
@@ -228,7 +218,6 @@
                     <field name="name"/>
                     <field name="notic_type"/>
                     <field name="date"/>
-                    <field name="society_ids"/>
                 </tree>
             </field>
         </record>

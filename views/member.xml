@@ -1,0 +1,135 @@
+<odoo>
+	<template id='member'>
+		<form method="post" t-attf-action="/member/form/">
+			<div>
+				<lable>user name</lable>
+				<input type='text' name='name'/>
+				<div class="form-check">
+					<input class="form-check-input" id="service_provider" type="radio" name="manager_group" value="service_provider">
+				    service_provider
+					</input>
+					<input class="form-check-input" id="customer" type="radio" name="manager_group" value="customer">
+				    customer
+					</input>
+				</div>
+				<div>
+					<label>E-mail</label>
+					<input tyep='text' name='email'/>
+				</div>
+				<div>
+					<label>Company</label>
+					<input tyep='text' name='companyname'/>
+				</div>
+				<div class="form-group col-md-4">
+			    	<label>Currency</label>
+			    	<select id="currency" class="form-control" name="currency">
+			    		<t t-foreach='currency' t-as='cur'>
+			        		<option t-attf-value="{{cur.name}}"><t t-esc='cur.name'/></option>
+			        	</t>
+			    	</select>
+			    </div>
+			    <div>
+					<label>Password</label>
+					<input tyep='password' name='password'/>
+				</div>
+			    <button type="submit" class="btn btn-primary">Submit</button>
+			</div>
+		</form>
+	</template>
+
+	<template id="complaintform">
+		<form t-attf-action="/complaint/form" method="post" id="Complaints_form">
+		  	<div class="form-group">
+		    	<select class="form-control" id="complaint_details" name="complaint_details">
+  					<option value="water">Water Problem</option>
+  					<option value="commonplot">Commonplot</option>
+  					<option value="security">Security</option>
+				</select>
+		  	</div>
+		  	<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+	</template>
+
+	<template id="portal_menu" name="Menu" inherit_id="portal.portal_breadcrumbs" priority="1">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <div  class='navbar' width='10%'><span><a href="yourhomepage">Activitys</a></span></div>
+            <div class='navbar' width='10%'><span><a href="complaint">Complaint</a></span></div>
+            <div class='navbar' width='10%'><span><a href="members"> Members</a></span></div>
+        </xpath>
+	</template>
+	<template id="user_form">
+		<t t-call="portal.portal_layout">
+			<div class="card-columns">
+		       	<t t-foreach="notice" t-as="n">
+				  	<div class="card">
+				    	<div class="card-body">
+					      	<h5 class="card-title"><span  t-field='n.name'/></h5>
+						    <p class="card-text">Type:<span  t-field='n.notic_type'/></p>
+						    <p class="card-text"> Details:<span t-field='n.description'/></p>
+						    <p class="card-text">Start Date:<span  t-field='n.start_date'/></p>
+						    <p class="card-text">End Date:<span t-field='n.end_date'/></p>
+				    	</div>
+					</div>
+				</t>
+			</div>
+		</t>
+	</template>
+	<template id="complaint_form">
+		<t t-call="portal.portal_layout">
+			<div class="container py-5">
+				<div class="card border-0 mx-auto bg-100 rounded-0 shadow-sm bg-white o_database_list w-50 p-3">
+				    <div class="card-body">
+				        <table class="table">
+				        	<thead>
+				                <tr>
+				                  <th scope="col">complaint details</th>
+				                  <th scope="col">complaint date</th>
+				                  <th scope="col">Member Name</th>
+				                  <th scope="col">State</th>
+				                </tr>
+		              		</thead>  
+				        	<t t-foreach="complaint" t-as="com">
+				                <tr>
+				                    <td><span t-field="com.complaint_details"/></td>
+				                    <td><span t-field="com.complaint_date"/></td>
+				                    <td><span t-field="com.member_ids"/></td>
+				                    <td><span t-field="com.state"/></td>
+				                </tr>
+				            </t>
+				        </table>
+				        <a role='button' class="btn btn-primary" t-attf-href="/complaintForm/">Create Complaint</a>
+				    </div>
+				</div>
+			</div>
+		</t>
+	</template>
+	<template id="member_form">
+		<t t-call="portal.portal_layout">
+			<div class="container py-5">
+				<div class="card border-0 mx-auto bg-100 rounded-0 shadow-sm bg-white o_database_list w-50 p-3">	   
+			       <div class="card-body">
+				        <table class="table">
+				        	<thead>
+				                <tr>
+				                  <th scope="col">name</th>
+				                  <th scope="col">house_no</th>
+				                  <th scope="col">ph_no</th>
+				                  <th scope="col">email</th>
+				                </tr>
+		              		</thead>  
+				        	<t t-foreach="member" t-as="m">
+				                <tr>
+				                    <td><span t-field="m.name"/></td>
+				                    <td><span t-field="m.house_no"/></td>
+				                    <td><span t-field="m.ph_no"/></td>
+				                    <td><span t-field="m.email"/></td>
+				                </tr>
+				            </t>
+				        </table>
+			       </div>
+				</div>
+			</div>
+		</t>
+	</template>
+</odoo>
+
